@@ -10,5 +10,8 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello world!
-  displayName: Say hello
+- script: | 
+    echo Installing Jfrog CLI latest version 
+    curl -fL https://install-cli.jfrog.io | sh
+    jf --help
+  displayName: JFrog CLI Installation
