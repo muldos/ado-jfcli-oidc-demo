@@ -14,4 +14,14 @@ steps:
     echo Installing Jfrog CLI latest version 
     curl -fL https://install-cli.jfrog.io | sh
     jf --help
+    echo "job id : $SYSTEM_JOBID"
+    echo "plan id : $SYSTEM_PLANID"
+    echo "hub : $SYSTEM_HUB"
   displayName: JFrog CLI Installation
+  env:
+    SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+    SYSTEM_JOBID: $(System.JobId)
+    SYSTEM_PLANID: $(System.PlanId)
+    SYSTEM_TEAMPROJECTID: $(System.TeamProjectId)
+    SYSTEM_HUB: $(System.HostType)
+    SYSTEM_COLLECTIONURI: $(System.CollectionUri)
