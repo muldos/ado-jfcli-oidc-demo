@@ -17,6 +17,7 @@ steps:
     echo "job id : $SYSTEM_JOBID"
     echo "plan id : $SYSTEM_PLANID"
     echo "hub : $SYSTEM_HUB"
+    echo "project id : $SYSTEM_TEAMPROJECTID"
   displayName: JFrog CLI Installation
   env:
     SYSTEM_ACCESSTOKEN: $(System.AccessToken)
