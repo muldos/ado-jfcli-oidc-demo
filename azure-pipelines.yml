@@ -22,3 +22,14 @@ steps:
       script: |
         echo "OIDC Username: $($jfStep.oidc_user)"
         echo "OIDC Token: $env:oidc_token"
+  - task: JFrogNpm@1
+    inputs:
+      command: 'install'
+      artifactoryConnection: 'solengeu-dro-rt'
+      sourceRepo: 'dro-npm-unsecure-remote'
+      collectBuildInfo: true
+      threads: '1'
+      buildName: '$(Build.DefinitionName)'
+      buildNumber: '$(Build.BuildNumber)'
+      includeEnvVars: true
+   
