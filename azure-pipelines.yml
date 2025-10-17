@@ -10,19 +10,15 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: | 
-    echo Installing Jfrog CLI latest version 
-    curl -fL https://install-cli.jfrog.io | sh
-    jf --help
-    echo "job id : $SYSTEM_JOBID"
-    echo "plan id : $SYSTEM_PLANID"
-    echo "hub : $SYSTEM_HUB"
-    echo "project id : $SYSTEM_TEAMPROJECTID"
-  displayName: JFrog CLI Installation
-  env:
-    SYSTEM_ACCESSTOKEN: $(System.AccessToken)
-    SYSTEM_JOBID: $(System.JobId)
-    SYSTEM_PLANID: $(System.PlanId)
-    SYSTEM_TEAMPROJECTID: $(System.TeamProjectId)
-    SYSTEM_HUB: $(System.HostType)
-    SYSTEM_COLLECTIONURI: $(System.CollectionUri)
+  - task: JfrogCliV2@1
+    name: jfStep
+    inputs:
+      jfrogPlatformConnection: 'dro-cli-oidc'
+      command: 'jf rt ping'
+
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: |
+        echo "OIDC Username: $($jfStep.oidc_user)"
+        echo "OIDC Token: $env:oidc_token"
