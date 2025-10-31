@@ -10,26 +10,15 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-#  - task: JfrogCliV2@1
-#    name: jfStep
-#    inputs:
-#      jfrogPlatformConnection: 'dro-cli-oidc'
-#      command: 'jf rt ping'
-
-#  - task: PowerShell@2
-#    inputs:
-#      targetType: 'inline'
-#      script: |
-#        echo "OIDC Username: $($jfStep.oidc_user)"
-#        echo "OIDC Token: $env:oidc_token"
-  - task: JFrogNpm@1
+  - task: JfrogCliV2@1
+    name: jfStep
     inputs:
-      command: 'install'
-      artifactoryConnection: 'solengeu-dro-rt'
-      sourceRepo: 'dro-npm-unsecure-remote'
-      collectBuildInfo: true
-      threads: '1'
-      buildName: '$(Build.DefinitionName)'
-      buildNumber: '$(Build.BuildNumber)'
-      includeEnvVars: true
-   
+      jfrogPlatformConnection: 'dro-cli-oidc'
+      command: 'jf rt ping'
+
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: |
+        echo "OIDC Username: $($jfStep.oidc_user)"
+        echo "OIDC Token: $env:oidc_token"
